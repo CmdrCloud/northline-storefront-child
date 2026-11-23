@@ -1,0 +1,19 @@
+/* Theme Name: Storefront Child
+ * Template: storefront
+ * Version: 1.1.0
+ * License: GNU General Public License v3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ */
+
+/*
+ * Header mini-cart: keep the drop-down hidden from screen readers until it is
+ * opened by hover or keyboard focus (Storefront only moves it off-screen).
+ */
+.site-header-cart .widget_shopping_cart {
+	visibility: hidden;
+}
+.site-header-cart:hover .widget_shopping_cart,
+.site-header-cart:focus-within .widget_shopping_cart,
+.site-header-cart.focus .widget_shopping_cart {
+	visibility: visible;
+}

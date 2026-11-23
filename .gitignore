@@ -1,0 +1,9 @@
+# OS / editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Never commit secrets or environment files
+.env
+*.env
+*.log
