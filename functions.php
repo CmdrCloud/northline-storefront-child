@@ -44,3 +44,13 @@ function northline_meta_description() {
 	}
 }
 add_action( 'wp_head', 'northline_meta_description', 1 );
+
+/**
+ * Let WooCommerce's "Hold stock" job also cancel unpaid orders from the block
+ * checkout. By default it only cancels orders created by the classic checkout,
+ * so abandoned block-checkout orders stayed "Pending payment" forever.
+ */
+function northline_cancel_unpaid_block_checkout_orders( $cancel, $order ) {
+	return $cancel || 'store-api' === $order->get_created_via();
+}
+add_filter( 'woocommerce_cancel_unpaid_order', 'northline_cancel_unpaid_block_checkout_orders', 10, 2 );

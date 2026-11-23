@@ -16,7 +16,7 @@ lives here so the parent theme and WordPress core stay untouched and updatable.
 | File | Purpose |
 |---|---|
 | `style.css` | Theme header, plus a small CSS fix that hides the header mini-cart from screen readers until it is opened. |
-| `functions.php` | Adds the GA4 tag (`NORTHLINE_GA4_ID`) and a meta description on every page. |
+| `functions.php` | Adds the GA4 tag (`NORTHLINE_GA4_ID`), a meta description on every page, and lets WooCommerce's Hold stock job cancel unpaid block-checkout orders. |
 
 ## Configuration
 - **GA4:** change `NORTHLINE_GA4_ID` in `functions.php`. The measurement ID is public, not a secret.
