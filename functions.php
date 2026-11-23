@@ -5,24 +5,23 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// GA4 measurement ID (public identifier, not a secret).
-define( 'NORTHLINE_GA4_ID', 'G-LV9GQ3R9J7' );
-
 /**
  * Print the official Google tag (GA4) in the <head> of every front-end page.
- * Skipped for logged-in admins so their own visits don't skew the reports.
+ * Each site sets its own ID in wp-config.php: define( 'SITE_GA4_ID', 'G-XXXXXXX' );
+ * Only loads on production, and not for logged-in admins, so test visits
+ * on local or staging never reach the client's reports.
  */
 function northline_google_tag() {
-	if ( current_user_can( 'manage_options' ) ) {
+	if ( ! defined( 'SITE_GA4_ID' ) || 'production' !== wp_get_environment_type() || current_user_can( 'manage_options' ) ) {
 		return;
 	}
 	?>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( NORTHLINE_GA4_ID ); ?>"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( SITE_GA4_ID ); ?>"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-		gtag('config', '<?php echo esc_js( NORTHLINE_GA4_ID ); ?>');
+		gtag('config', '<?php echo esc_js( SITE_GA4_ID ); ?>');
 	</script>
 	<?php
 }
